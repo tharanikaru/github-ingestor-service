@@ -1,0 +1,17 @@
+spring:
+    datasource:
+        url: jdbc:postgresql://git-ing-db.cmo2sx79horp.eu-north-1.rds.amazonaws.com:5432/ingestordb
+        username: postgres
+        password: password
+    hikari:
+        poolName: Hikari
+        auto-commit: false
+        maximum-pool-size: 5
+        minimum-idle: 1
+        connection-timeout: 300000
+        idle-timeout: 1800000
+        max-lifetime: 3600000
+        keepalive-time: 30000
+    jpa:
+        hibernate:
+            dialect: org.hibernate.dialect.PostgreSQLDialect
