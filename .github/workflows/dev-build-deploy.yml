@@ -49,11 +49,11 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{env.AWS_REGION}}
 
-    - name: Login to Amazon ECR
-        id: login-ecr-public
-        uses: aws-actions/amazon-ecr-login@v2
-        with:
-          registry-type: public
+#    - name: Login to Amazon ECR
+#        id: login-ecr-public
+#        uses: aws-actions/amazon-ecr-login@v2
+#        with:
+#          registry-type: public
 
 #    - name: Build & push Docker image
 #      uses: mr-smithers-excellent/docker-build-push@v6
@@ -66,24 +66,24 @@ jobs:
 #        password: ${{ secrets.DOCKER_PASSWORD }}
 
 
-    - name: Build, tag, and push docker image to Amazon ECR Public
-        env:
-          REGISTRY: ${{ steps.login-ecr-public.outputs.registry }}
-          REGISTRY_ALIAS: cicd-demo-registry-alias
-          REPOSITORY: cicd-demo
-          IMAGE_TAG: ${{ steps.commit.outputs.short }}
-        run: |
-          docker build -t $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:$IMAGE_TAG -f Dockerfile .
-          docker push $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:$IMAGE_TAG
-
-    - name: Update kube config
-      run: aws eks update-kubeconfig --name $EKS_CLUSTER_NAME --region $AWS_REGION
-
-    - name: Deploy to EKS
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          IMAGE_TAG: ${{ steps.commit.outputs.short }}
-        run: |
-          sed -i.bak "s|DOCKER_IMAGE|$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG|g" manifests/hello-app-deployment.yaml && \
-          kubectl apply -f manifests/hello-app-deployment.yaml
-          kubectl apply -f manifests/hello-app-service.yaml
+#    - name: Build, tag, and push docker image to Amazon ECR Public
+#        env:
+#          REGISTRY: ${{ steps.login-ecr-public.outputs.registry }}
+#          REGISTRY_ALIAS: cicd-demo-registry-alias
+#          REPOSITORY: cicd-demo
+#          IMAGE_TAG: ${{ steps.commit.outputs.short }}
+#        run: |
+#          docker build -t $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:$IMAGE_TAG -f Dockerfile .
+#          docker push $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:$IMAGE_TAG
+#
+#    - name: Update kube config
+#      run: aws eks update-kubeconfig --name $EKS_CLUSTER_NAME --region $AWS_REGION
+#
+#    - name: Deploy to EKS
+#        env:
+#          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+#          IMAGE_TAG: ${{ steps.commit.outputs.short }}
+#        run: |
+#          sed -i.bak "s|DOCKER_IMAGE|$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG|g" manifests/hello-app-deployment.yaml && \
+#          kubectl apply -f manifests/hello-app-deployment.yaml
+#          kubectl apply -f manifests/hello-app-service.yaml
