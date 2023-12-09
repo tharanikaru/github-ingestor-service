@@ -1,12 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: github-cicd-test-service
+  name: developeriq-ingestor-service
+  namespace: developerid
   labels:
-    app: cicd-demo-1
+    app: developeriq
 spec:
   selector:
-    app: cicd-demo-1
+    app: developeriq
 
   ports:
     - port: 8080

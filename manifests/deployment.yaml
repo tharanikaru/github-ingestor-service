@@ -1,23 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: github-cicd-test
+  name: developeriq-ingestor
+  namespace: developerid
   labels:
-    app: cicd-demo-1
+    app: developeriq
 
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: cicd-demo-1
+      app: developeriq
 
   template:
     metadata:
       labels:
-        app: cicd-demo-1
+        app: developeriq
     spec:
       containers:
-        - name: cicd-demo-1
+        - name: developeriq
           image: DOCKER_IMAGE
           imagePullPolicy: Always
           ports:
