@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: github-cicd-demo-service
+  name: github-cicd-test-service
   labels:
-    app: cicd-demo
+    app: cicd-demo-1
 spec:
   selector:
-    app: cicd-demo
+    app: cicd-demo-1
 
   ports:
     - port: 8080

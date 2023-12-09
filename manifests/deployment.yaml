@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: github-cicd-demo
+  name: github-cicd-test
   labels:
-    app: cicd-demo
+    app: cicd-demo-1
 
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: cicd-demo
+      app: cicd-demo-1
 
   template:
     metadata:
       labels:
-        app: cicd-demo
+        app: cicd-demo-1
     spec:
       containers:
-        - name: cicd-demo
+        - name: cicd-demo-1
           image: DOCKER_IMAGE
           imagePullPolicy: Always
           ports:
