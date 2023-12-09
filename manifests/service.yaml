@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: developeriq-ingestor-service
-  namespace: developerid
+  namespace: developeriq
   labels:
     app: developeriq
 spec:

@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: developeriq-ingestor
-  namespace: developerid
+  namespace: developeriq
   labels:
     app: developeriq
 
