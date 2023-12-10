@@ -22,7 +22,7 @@ spec:
           image: DOCKER_IMAGE
           imagePullPolicy: Always
           ports:
-            - containerPort: 8080
+            - containerPort: 9090
   strategy:
     type: RollingUpdate
     rollingUpdate:

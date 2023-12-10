@@ -10,7 +10,7 @@ spec:
     app: developeriq
 
   ports:
-    - port: 8080
-      targetPort: 8080
+    - port: 9090
+      targetPort: 9090
 
   type: LoadBalancer
