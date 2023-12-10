@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: developeriq-ingestor
+  namespace: developeriq
+  labels:
+    app: developeriq
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: developeriq
+
+  template:
+    metadata:
+      labels:
+        app: developeriq
+    spec:
+      containers:
+        - name: developeriq
+          image: DOCKER_IMAGE
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
