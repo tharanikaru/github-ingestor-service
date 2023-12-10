@@ -17,7 +17,7 @@ permissions:
 
 env:
   ECR_REPOSITORY: developeriq-ingestor
-  EKS_CLUSTER_NAME: developerqi-eks
+  EKS_CLUSTER_NAME: developerqi-k8
   AWS_REGION: eu-north-1
 
 jobs:
