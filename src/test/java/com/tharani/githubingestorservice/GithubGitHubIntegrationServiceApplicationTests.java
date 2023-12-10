@@ -1,10 +1,10 @@
-package com.example.githubingestorservice;
+package com.tharani.githubingestorservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class GithubIngestorServiceApplicationTests {
+class GithubGitHubIntegrationServiceApplicationTests {
 
 	@Test
 	void contextLoads() {

@@ -1,6 +1,7 @@
 spring:
     datasource:
         url: jdbc:postgresql://git-ing-db.cmo2sx79horp.eu-north-1.rds.amazonaws.com:5432/ingestordb
+#        url: jdbc:postgresql://localhost:5432/metricdb
         username: postgres
         password: password
     hikari:
@@ -15,3 +16,9 @@ spring:
     jpa:
         hibernate:
             dialect: org.hibernate.dialect.PostgreSQLDialect
+server:
+    port: 8081
+github:
+    owner: tharanikaru
+    repository: AcmeCorp
+    token: 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
