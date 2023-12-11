@@ -65,7 +65,7 @@ public class GitHubIntegrationService {
                                                     CommitDTO commitDTO) {
         val jpaCommit = hashIdToCommitMap.getOrDefault(commitDTO.getCommitHash(), new JpaDeveloperCommit());
         jpaCommit.setCommitHash(commitDTO.getCommitHash());
-        jpaCommit.setJpaDeveloper(userNameToDeveloperMap.get(commitDTO.getCommitDetails().getCommitter().getUserName()));
+        jpaCommit.setJpaDeveloper(userNameToDeveloperMap.get(commitDTO.getCommitDetails().getCommitter().getUserName().toLowerCase()));
         jpaCommit.setUrl(commitDTO.getUrl());
         jpaCommit.setUpdatedAt(LocalDateTime.now());
         if (jpaCommit.getId() == null) {
@@ -83,6 +83,7 @@ public class GitHubIntegrationService {
 
     private List<String> githubUsersFromCommits(List<CommitDTO> commits) {
         return commits.stream()
+                .filter(c -> c.getCommitDetails() != null && c.getCommitDetails().getCommitter() != null && c.getCommitDetails().getCommitter().getUserName() != null)
                 .map(c -> c.getCommitDetails().getCommitter().getUserName().toLowerCase())
                 .collect(Collectors.toList());
     }
@@ -123,6 +124,7 @@ public class GitHubIntegrationService {
 
     private List<String> githubUsersFromIssues(List<IssueDTO> issues) {
         return issues.stream()
+                .filter(issue -> issue.getAssignee() != null && issue.getAssignee().getName() != null)
                 .map(issue -> issue.getAssignee().getName().toLowerCase())
                 .collect(Collectors.toList());
     }
@@ -132,7 +134,9 @@ public class GitHubIntegrationService {
                                                   IssueDTO issueDTO) {
         val jpaIssue = idToIssueMap.getOrDefault(issueDTO.getId(), new JpaDeveloperIssue());
         jpaIssue.setTitle(issueDTO.getTitle());
-        jpaIssue.setJpaDeveloper(userNameToDeveloperMap.get(issueDTO.getAssignee().getName().toLowerCase()));
+        if (issueDTO.getAssignee() != null && issueDTO.getAssignee().getName() != null) {
+            jpaIssue.setJpaDeveloper(userNameToDeveloperMap.get(issueDTO.getAssignee().getName().toLowerCase()));
+        }
         jpaIssue.setUrl(issueDTO.getUrl());
         jpaIssue.setState(issueDTO.getState());
         jpaIssue.setExternalId(issueDTO.getId());

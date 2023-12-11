@@ -13,12 +13,15 @@ spring:
         idle-timeout: 1800000
         max-lifetime: 3600000
         keepalive-time: 30000
+
     jpa:
         hibernate:
             dialect: org.hibernate.dialect.PostgreSQLDialect
+            ddl-auto: update
+
 server:
     port: 9090
 github:
     owner: tharanikaru
     repository: AcmeCorp
-    token: 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
+    token: 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
